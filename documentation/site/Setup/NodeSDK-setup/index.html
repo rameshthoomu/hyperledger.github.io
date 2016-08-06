@@ -1,0 +1,647 @@
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  
+  
+  <title>NodeSDK Setup - Hyperledger Fabric</title>
+  
+
+  <link rel="shortcut icon" href="../../favicon.ico">
+  
+
+  
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
+
+  <link rel="stylesheet" href="../../css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../css/theme_extra.css" type="text/css" />
+  <link rel="stylesheet" href="../../css/highlight.css">
+  <link href="../../css/extra.css" rel="stylesheet">
+  <link href="../../css/second_extra.css" rel="stylesheet">
+
+  
+  <script>
+    // Current page data
+    var mkdocs_page_name = "NodeSDK Setup";
+    var mkdocs_page_input_path = "Setup\NodeSDK-setup.md";
+    var mkdocs_page_url = "/Setup/NodeSDK-setup/";
+  </script>
+  
+  <script src="../../js/jquery-2.1.1.min.js"></script>
+  <script src="../../js/modernizr-2.8.3.min.js"></script>
+  <script type="text/javascript" src="../../js/highlight.pack.js"></script>
+  <script src="../../js/theme.js"></script> 
+  <script src="../../API/Samples/Sample_1.js"></script>
+
+  
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+      <div class="wy-side-nav-search">
+        <a href="../.." class="icon icon-home"> Hyperledger Fabric</a>
+        <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+        <ul class="current">
+          
+            <li>
+    <li class="toctree-l1 ">
+        <a class="" href="../..">Home</a>
+        
+    </li>
+<li>
+          
+            <li>
+    <li class="toctree-l1 ">
+        <a class="" href="../../glossary/">Glossary</a>
+        
+    </li>
+<li>
+          
+            <li>
+    <li class="toctree-l1 ">
+        <a class="" href="../../protocol-spec/">ProtocolSpec</a>
+        
+    </li>
+<li>
+          
+            <li>
+    <li class="toctree-l1 ">
+        <a class="" href="../../protocol-spec_zh/">Protocol Spec zh</a>
+        
+    </li>
+<li>
+          
+            <li>
+    <li class="toctree-l1 ">
+        <a class="" href="../../biz/usecases/">Usecases</a>
+        
+    </li>
+<li>
+          
+            <li>
+    <ul class="subnav">
+    <li><span>Dev-Setup</span></li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../dev-setup/devenv/">Fabric Developer Setup</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../dev-setup/build/">BuildingFabric</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../dev-setup/devenv/">FabricDeveloperSetup</a>
+        
+    </li>
+
+        
+    </ul>
+<li>
+          
+            <li>
+    <ul class="subnav">
+    <li><span>Setup</span></li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../Chaincode-setup/">Chaincode or Application Developer Setup</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../Network-setup/">Fabric Network Setup</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 current">
+        <a class="current" href="./">NodeSDK Setup</a>
+        
+            <ul>
+            
+                <li class="toctree-l3"><a href="#hyperledger-fabric-client-hfc-sdk-for-nodejs">Hyperledger Fabric Client (HFC) SDK for Node.js</a></li>
+                
+                    <li><a class="toctree-l4" href="#installing-the-hfc-module">Installing the hfc module</a></li>
+                
+            
+                <li class="toctree-l3"><a href="#overview">Overview</a></li>
+                
+            
+                <li class="toctree-l3"><a href="#getting-started">Getting Started</a></li>
+                
+                    <li><a class="toctree-l4" href="#some-basic-terminology">Some basic terminology</a></li>
+                
+                    <li><a class="toctree-l4" href="#learn-by-example">Learn by example</a></li>
+                
+            
+                <li class="toctree-l3"><a href="#getting-set-up">Getting Set Up</a></li>
+                
+                    <li><a class="toctree-l4" href="#chaincode-deployment-directory-structure">Chaincode Deployment Directory Structure</a></li>
+                
+                    <li><a class="toctree-l4" href="#enabling-tls">Enabling TLS</a></li>
+                
+            
+                <li class="toctree-l3"><a href="#running-unit-tests">Running Unit Tests</a></li>
+                
+                    <li><a class="toctree-l4" href="#running-the-sdk-unit-tests">Running the SDK unit tests</a></li>
+                
+            
+            </ul>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../ca-setup/">CA Setup</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../logging-control/">Logging</a>
+        
+    </li>
+
+        
+    </ul>
+<li>
+          
+            <li>
+    <ul class="subnav">
+    <li><span>Gerrit</span></li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../Gerrit/gerrit/">Gerrit Introduction</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../Gerrit/lf-account/">LF Account</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../Gerrit/best-practices/">Best Practices</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../Gerrit/changes/">Changes</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../Gerrit/reviewing/">Gerrit Review</a>
+        
+    </li>
+
+        
+    </ul>
+<li>
+          
+            <li>
+    <ul class="subnav">
+    <li><span>API's</span></li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../API/ChaincodeAPI/">Chaincode APIs</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../API/CoreAPI/">Core API</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../API/MemberServicesAPI/">CA API</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../SystemChaincodes/noop/">System Chaincode</a>
+        
+    </li>
+
+        
+    </ul>
+<li>
+          
+            <li>
+    <ul class="subnav">
+    <li><span>FAQ</span></li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../FAQ/chaincode_FAQ/">ChainCodeFAQ</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../FAQ/confidentiality_FAQ/">ConfidentialityFAQ</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../FAQ/consensus_FAQ/">ConsensusFAQ</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../FAQ/identity_management_FAQ/">Identity ManagementFAQ</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../FAQ/usage_FAQ/">UsageFAQ</a>
+        
+    </li>
+
+        
+    </ul>
+<li>
+          
+            <li>
+    <ul class="subnav">
+    <li><span>Tech</span></li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../tech/application-ACL/">Application ACL</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../tech/attributes/">Attributes</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../tech/best-practices/">Best Practices</a>
+        
+    </li>
+
+        
+    </ul>
+<li>
+          
+        </ul>
+      </div>
+      &nbsp;
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../..">Hyperledger Fabric</a>
+      </nav>
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../..">Docs</a> &raquo;</li>
+    
+      
+        
+          <li>Setup &raquo;</li>
+        
+      
+    
+    <li>NodeSDK Setup</li>
+    <li class="wy-breadcrumbs-aside">
+      
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main">
+            <div class="section">
+              
+                <h2 id="hyperledger-fabric-client-hfc-sdk-for-nodejs">Hyperledger Fabric Client (HFC) SDK for Node.js<a class="headerlink" href="#hyperledger-fabric-client-hfc-sdk-for-nodejs" title="Permanent link">&para;</a></h2>
+<p>The Hyperledger Fabric Client (HFC) SDK provides a powerful and easy to use API to interact with a Hyperledger Fabric blockchain.</p>
+<p>This document assumes that you already have set up a Node.js development environment. If not, go <a href="https://nodejs.org/en/download/package-manager/">here</a> to download and install Node.js for your OS. You&rsquo;ll also want the latest version of <code>npm</code> installed. For that, execute <code>sudo npm install npm -g</code> to get the latest version.</p>
+<h3 id="installing-the-hfc-module">Installing the hfc module<a class="headerlink" href="#installing-the-hfc-module" title="Permanent link">&para;</a></h3>
+<p>We publish the <code>hfc</code> node module to <code>npm</code>. To install <code>hfc</code> from npm simply execute the following command:</p>
+<pre><code>npm install -g hfc
+</code></pre>
+
+<h2 id="overview">Overview<a class="headerlink" href="#overview" title="Permanent link">&para;</a></h2>
+<p>The sections in this document are as follows:</p>
+<ul>
+<li>
+<p>The <a href="#getting-started">Getting Started</a> section is intended to help you quickly get a feel for HFC, how to use it, and some of its common capabilities. This is demonstrated by example.</p>
+</li>
+<li>
+<p>The <a href="#getting-set-up">Getting Set Up</a> section shows you how to set up up your environment and how to <a href="#running-unit-tests">run the unit tests</a>. Looking at the implementation of the unit tests will also help you learn more about the APIs by example, including asset management and confidentiality.</p>
+</li>
+</ul>
+<h2 id="getting-started">Getting Started<a class="headerlink" href="#getting-started" title="Permanent link">&para;</a></h2>
+<p>This purpose of this section is to help you quickly get a feel for HFC and how you may use it. It is not intended to demonstrate all of its power, but to demonstrate common use cases by example.</p>
+<h3 id="some-basic-terminology">Some basic terminology<a class="headerlink" href="#some-basic-terminology" title="Permanent link">&para;</a></h3>
+<p>First, there is some basic terminology you should understand. In order to transact on a hyperledger blockchain, you must first have an identity which has been both <strong>registered</strong> and <strong>enrolled</strong>.</p>
+<p>Think of <strong>registration</strong> as <em>issuing a user invitation</em> to join a blockchain. It consists of adding a new user name (also called an <em>enrollment ID</em>) to the membership service configuration. This can be done programatically with the <code>Member.register</code> method, or by adding the enrollment ID directly to the <a href="https://github.com/hyperledger/fabric/blob/master/membersrvc/membersrvc.yaml">membersrvc.yaml</a> configuration file.</p>
+<p>Think of <strong>enrollment</strong> as <em>accepting a user invitation</em> to join a blockchain. This is always done by the entity that will transact on the blockchain. This can be done programatically via the <code>Member.enroll</code> method.</p>
+<h3 id="learn-by-example">Learn by example<a class="headerlink" href="#learn-by-example" title="Permanent link">&para;</a></h3>
+<p>The best way to quickly learn HFC is by example.</p>
+<p>The following example demonstrates a typical web app. The web app authenticates a user and then transacts on a blockchain on behalf of that user.</p>
+<pre><code>/**
+ * This example shows how to do the following in a web app.
+ * 1) At initialization time, enroll the web app with the block chain.
+ *    The identity must have already been registered.
+ * 2) At run time, after a user has authenticated with the web app:
+ *    a) register and enroll an identity for the user;
+ *    b) use this identity to deploy, query, and invoke a chaincode.
+ */
+
+// To include the package from your hyperledger fabric directory:
+//    var hfc = require(&quot;myFabricDir/sdk/node&quot;);
+// To include the package from npm:
+//      var hfc = require('hfc');
+var hfc = require('hfc');
+
+// Create a client chain.
+// The name can be anything as it is only used internally.
+var chain = hfc.newChain(&quot;targetChain&quot;);
+
+// Configure the KeyValStore which is used to store sensitive keys
+// as so it is important to secure this storage.
+// The FileKeyValStore is a simple file-based KeyValStore, but you
+// can easily implement your own to store whereever you want.
+chain.setKeyValStore( hfc.newFileKeyValStore('/tmp/keyValStore') );
+
+// Set the URL for member services
+chain.setMemberServicesUrl(&quot;grpc://localhost:7054&quot;);
+
+// Add a peer's URL
+chain.addPeer(&quot;grpc://localhost:7051&quot;);
+
+// Enroll &quot;WebAppAdmin&quot; which is already registered because it is
+// listed in fabric/membersrvc/membersrvc.yaml with its one time password.
+// If &quot;WebAppAdmin&quot; has already been registered, this will still succeed
+// because it stores the state in the KeyValStore
+// (i.e. in '/tmp/keyValStore' in this sample).
+chain.enroll(&quot;WebAppAdmin&quot;, &quot;DJY27pEnl16d&quot;, function(err, webAppAdmin) {
+   if (err) return console.log(&quot;ERROR: failed to register %s: %s&quot;,err);
+   // Successfully enrolled WebAppAdmin during initialization.
+   // Set this user as the chain's registrar which is authorized to register other users.
+   chain.setRegistrar(webAppAdmin);
+   // Now begin listening for web app requests
+   listenForUserRequests();
+});
+
+// Main web app function to listen for and handle requests
+function listenForUserRequests() {
+   for (;;) {
+      // WebApp-specific logic goes here to await the next request.
+      // ...
+      // Assume that we received a request from an authenticated user
+      // 'userName', and determined that we need to invoke the chaincode
+      // with 'chaincodeID' and function named 'fcn' with arguments 'args'.
+      handleUserRequest(userName,chaincodeID,fcn,args);
+   }
+}
+
+// Handle a user request
+function handleUserRequest(userName, chaincodeID, fcn, args) {
+   // Register and enroll this user.
+   // If this user has already been registered and/or enrolled, this will
+   // still succeed because the state is kept in the KeyValStore
+   // (i.e. in '/tmp/keyValStore' in this sample).
+   var registrationRequest = {
+        enrollmentID: userName,
+        // Customize account &amp; affiliation
+        account: &quot;bank_a&quot;,
+        affiliation: &quot;00001&quot;
+   };
+   chain.registerAndEnroll( registrationRequest, function(err, user) {
+      if (err) return console.log(&quot;ERROR: %s&quot;,err);
+      // Issue an invoke request
+      var invokeRequest = {
+        // Name (hash) required for invoke
+        chaincodeID: chaincodeID,
+        // Function to trigger
+        fcn: fcn,
+        // Parameters for the invoke function
+        args: args
+     };
+     // Invoke the request from the user object.
+     var tx = user.invoke(invokeRequest);
+     // Listen for the 'submitted' event
+     tx.on('submitted', function(results) {
+        console.log(&quot;submitted invoke: %j&quot;,results);
+     });
+     // Listen for the 'complete' event.
+     tx.on('complete', function(results) {
+        console.log(&quot;completed invoke: %j&quot;,results;
+     });
+     // Listen for the 'error' event.
+     tx.on('error', function(err) {
+        console.log(&quot;error on invoke: %j&quot;,err);
+     });
+   });
+}
+</code></pre>
+
+<h2 id="getting-set-up">Getting Set Up<a class="headerlink" href="#getting-set-up" title="Permanent link">&para;</a></h2>
+<p>First, you&rsquo;ll want to have a running peer node and CA. You can follow the instructions for setting up a network <a href="https://github.com/hyperledger/fabric/blob/master/docs/Setup/ca-setup.md#Operating-the-CA">here</a>, and start a single peer node and CA.</p>
+<h3 id="chaincode-deployment-directory-structure">Chaincode Deployment Directory Structure<a class="headerlink" href="#chaincode-deployment-directory-structure" title="Permanent link">&para;</a></h3>
+<p>To have the chaincode deployment succeed in network mode, you must properly set up the chaincode project outside of your Hyperledger Fabric source tree. The following instructions will demonstrate how to properly set up the directory structure to deploy <em>chaincode_example02</em> in network mode.</p>
+<p>The chaincode project must be placed under the <code>$GOPATH/src</code> directory. For example, the <a href="https://github.com/hyperledger/fabric/blob/master/examples/chaincode/go/chaincode_example02/chaincode_example02.go">chaincode_example02</a> project should be placed under <code>$GOPATH/src/</code> as shown below.</p>
+<pre><code>mkdir -p $GOPATH/src/github.com/chaincode_example02/
+cd $GOPATH/src/github.com/chaincode_example02
+curl GET https://raw.githubusercontent.com/hyperledger/fabric/master/examples/chaincode/go/chaincode_example02/chaincode_example02.go &gt; chaincode_example02.go
+</code></pre>
+
+<p>After you have placed your chaincode project under the <code>$GOPATH/src</code>, you will need to vendor the dependencies. From the directory containing your chaincode source, run the following commands:</p>
+<pre><code>go get -u github.com/kardianos/govendor
+cd $GOPATH/src/github.com/chaincode_example02
+govendor init
+govendor fetch github.com/hyperledger/fabric
+</code></pre>
+
+<p>Now, execute <code>go build</code> to verify that all of the chaincode dependencies are present.</p>
+<pre><code>go build
+</code></pre>
+
+<p>Next, we will switch over to the node sdk directory in the fabric repo to run the node sdk tests, to make sure you have everything properly set up. Verify that the <a href="https://github.com/hyperledger/fabric/blob/master/sdk/node/test/unit/chain-tests.js">chain-tests.js</a> unit test file points to the correct chaincode project path. The default directory is set to <code>github.com/chaincode_example02/</code> as shown below. If you placed the sample chaincode elsewhere, then you will need to change that.</p>
+<pre><code>// Path to the local directory containing the chaincode project under $GOPATH
+var testChaincodePath = &quot;github.com/chaincode_example02/&quot;;
+</code></pre>
+
+<p><strong>Note:</strong> You will need to run <code>npm install</code> the first time you run the sdk tests, in order to install all of the dependencies. Set the <code>DEPLOY_MODE</code> environment variable to <code>net</code> and run the chain-tests as follows:</p>
+<pre><code>cd $GOPATH/src/github.com/hyperledger/fabric/sdk/node
+npm install
+export DEPLOY_MODE='net'
+node test/unit/chain-tests.js | node_modules/.bin/tap-spec
+</code></pre>
+
+<h3 id="enabling-tls">Enabling TLS<a class="headerlink" href="#enabling-tls" title="Permanent link">&para;</a></h3>
+<p>If you wish to configure TLS with the Membership Services server, the following steps are required:</p>
+<ul>
+<li>Modify <code>$GOPATH/src/github.com/hyperledger/fabric/membersrvc/membersrvc.yaml</code> as follows:</li>
+</ul>
+<pre><code>server:
+     tls:
+        cert:
+            file: &quot;/var/hyperledger/production/.membersrvc/tlsca.cert&quot;
+        key:
+            file: &quot;/var/hyperledger/production/.membersrvc/tlsca.priv&quot;
+</code></pre>
+
+<p>To specify to the Membership Services (TLS) Certificate Authority (TLSCA) what X.509 v3 Certificate (with a corresponding Private Key) to use:</p>
+<ul>
+<li>Modify <code>$GOPATH/src/github.com/hyperledger/fabric/peer/core.yaml</code> as follows:</li>
+</ul>
+<pre><code>peer:
+    pki:
+        tls:
+            enabled: true
+            rootcert:
+                file: &quot;/var/hyperledger/production/.membersrvc/tlsca.cert&quot;
+</code></pre>
+
+<p>To configure the peer to connect to the Membership Services server over TLS (otherwise, the connection will fail).</p>
+<ul>
+<li>
+<p>Bootstrap your Membership Services and the peer. This is needed in order to have the file <em>tlsca.cert</em> generated by the member services.</p>
+</li>
+<li>
+<p>Copy <code>/var/hyperledger/production/.membersrvc/tlsca.cert</code> to <code>$GOPATH/src/github.com/hyperledger/fabric/sdk/node</code>.</p>
+</li>
+</ul>
+<p><em>Note:</em> If you cleanup the folder <code>/var/hyperledger/production</code> then don&rsquo;t forget to copy again the <em>tlsca.cert</em> file as described above.</p>
+<h2 id="running-unit-tests">Running Unit Tests<a class="headerlink" href="#running-unit-tests" title="Permanent link">&para;</a></h2>
+<p>HLC includes a set of unit tests implemented with the <a href="https://github.com/substack/tape">tape framework</a>. The <a href="https://github.com/hyperledger/fabric/blob/master/sdk/node/bin/run-unit-tests.sh">unit test script</a> builds and runs both the membership service server and the peer node for you, therefore you do not have to start those manually.</p>
+<h3 id="running-the-sdk-unit-tests">Running the SDK unit tests<a class="headerlink" href="#running-the-sdk-unit-tests" title="Permanent link">&para;</a></h3>
+<p>HFC includes a set of unit tests implemented with the <a href="https://github.com/substack/tape">tape framework</a>. To run the unit tests, execute the following commands:</p>
+<pre><code>cd $GOPATH/src/github.com/hyperledger/fabric
+make node-sdk-unit-tests
+</code></pre>
+<p>The following are brief descriptions of each of the unit tests that are being run.</p>
+<h4 id="registrar">registrar<a class="headerlink" href="#registrar" title="Permanent link">&para;</a></h4>
+<p>The <a href="https://github.com/hyperledger/fabric/blob/master/sdk/node/test/unit/registrar.js">registrar.js</a> test case exercises registering users with Membership Services. It also tests registering a designated registrar user which can then register additional users.</p>
+<h4 id="chain-tests">chain-tests<a class="headerlink" href="#chain-tests" title="Permanent link">&para;</a></h4>
+<p>The <a href="https://github.com/hyperledger/fabric/blob/master/sdk/node/test/unit/chain-tests.js">chain-tests.js</a> test case exercises the <a href="https://github.com/hyperledger/fabric/tree/master/examples/chaincode/go/chaincode_example02">chaincode_example02.go</a> chaincode when it has been deployed in both development mode and network mode.</p>
+<h4 id="asset-mgmt">asset-mgmt<a class="headerlink" href="#asset-mgmt" title="Permanent link">&para;</a></h4>
+<p>The <a href="https://github.com/hyperledger/fabric/blob/master/sdk/node/test/unit/asset-mgmt.js">asset-mgmt.js</a> test case exercises the <a href="https://github.com/hyperledger/fabric/tree/master/examples/chaincode/go/asset_management">asset_management.go</a> chaincode when it has been deployed in both development mode and network mode.</p>
+<h4 id="asset-mgmt-with-roles">asset-mgmt-with-roles<a class="headerlink" href="#asset-mgmt-with-roles" title="Permanent link">&para;</a></h4>
+<p>The <a href="https://github.com/hyperledger/fabric/blob/master/sdk/node/test/unit/asset-mgmt-with-roles.js">asset-mgmt-with-roles.js</a> test case exercises the <a href="https://github.com/hyperledger/fabric/tree/master/examples/chaincode/go/asset_management_with_roles">asset_management_with_roles.go</a> chaincode when it has been deployed in both development mode and network mode.</p>
+<h4 id="troublingshooting">Troublingshooting<a class="headerlink" href="#troublingshooting" title="Permanent link">&para;</a></h4>
+<p>If you see errors stating that the client has already been registered/enrolled, keep in mind that you can perform the enrollment process only once, as the enrollmentSecret is a one-time-use password. You will see these errors if you have performed a user registration/enrollment and subsequently deleted the cryptographic tokens stored on the client side. The next time you try to enroll, errors similar to the ones below will be seen.</p>
+<p><code>Error: identity or token do not match</code>
+   <code>Error: user is already registered</code></p>
+<p>To address this, remove any stored cryptographic material from the CA server by following the instructions <a href="https://github.com/hyperledger/fabric/blob/master/docs/Setup/Chaincode-setup.md#removing-temporary-files-when-security-is-enabled">here</a>. You will also need to remove any of the cryptographic tokens stored on the client side by deleting the KeyValStore directory. That directory is configurable and is set to <code>/tmp/keyValStore</code> within the unit tests.</p>
+              
+            </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../ca-setup/" class="btn btn-neutral float-right" title="CA Setup">Next <span class="icon icon-circle-arrow-right"></span></a>
+      
+      
+        <a href="../Network-setup/" class="btn btn-neutral" title="Fabric Network Setup"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+    
+      <p>Copyright &copy; 2016 IBM Corp. <br></br>Contributed to the Hyperledger Project under the <a href="https://github.com/hyperledger/fabric/blob/master/LICENSE" target="_blank">Apache Software License 2.0</a></p>
+    
+  </div>
+
+  Built with <a href="http://www.mkdocs.org">MkDocs</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+	  
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+<div class="rst-versions" role="note" style="cursor: pointer">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      
+      
+        <span><a href="../Network-setup/" style="color: #fcfcfc;">&laquo; Previous</a></span>
+      
+      
+        <span style="margin-left: 15px"><a href="../ca-setup/" style="color: #fcfcfc">Next &raquo;</a></span>
+      
+    </span>
+</div>
+
+</body>
+</html>
